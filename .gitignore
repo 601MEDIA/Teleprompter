@@ -1,0 +1,12 @@
+# SQLite database
+data/
+*.db
+*.sqlite
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
