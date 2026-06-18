@@ -609,6 +609,9 @@ textarea {
 .tp-controls.hidden {
     transform: translateY(100%);
     opacity: 0;
+}
+
+.tp-controls.hidden.done {
     pointer-events: none;
 }
 
@@ -691,6 +694,12 @@ textarea {
 
 .tp-btn.exit-btn { color: var(--danger); border-color: var(--danger); }
 .tp-btn.exit-btn:hover { background: rgba(231,76,60,.1); }
+
+.tp-btn.active {
+    background: rgba(255,146,0,.15);
+    border-color: var(--launch);
+    color: var(--launch);
+}
 
 /* Range sliders */
 input[type="range"] {

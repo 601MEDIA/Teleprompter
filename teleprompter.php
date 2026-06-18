@@ -60,6 +60,7 @@
         <!-- Row 2: Buttons + segment counter -->
         <div class="tp-controls-row tp-controls-btns">
             <button class="tp-btn" id="tp-restart-btn" title="Restart (R)">⟳</button>
+            <button class="tp-btn" id="tp-reverse-btn" title="Reverse Scroll (X)" onclick="window._tp.toggleReverse()">⇅</button>
             <button class="tp-btn play-btn" id="tp-play-btn" title="Play/Pause (Space)">▶</button>
             <div class="tp-counter" id="tp-counter"></div>
             <button class="tp-btn" id="tp-fs-btn" title="Fullscreen (F)" onclick="toggleFullscreen()">⛶</button>

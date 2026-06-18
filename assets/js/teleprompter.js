@@ -10,6 +10,7 @@ class Teleprompter {
         this.counter       = document.getElementById('tp-counter')
 
         this.isPlaying     = false
+        this.reversed      = false
         this.raf           = null
         this.speed         = 1.5
         this.fontSize      = 52
@@ -81,16 +82,33 @@ class Teleprompter {
     _tick() {
         if (!this.isPlaying) return
 
+        const delta     = this.reversed ? -this.speed : this.speed
+        const nextScroll = this.wrapper.scrollTop + delta
+
+        if (this.reversed && nextScroll <= 0) {
+            this.wrapper.scrollTop = 0
+            this.pause()
+            return
+        }
+
         const maxScroll = this.wrapper.scrollHeight - this.wrapper.clientHeight
-        if (this.wrapper.scrollTop >= maxScroll) {
+        if (!this.reversed && nextScroll >= maxScroll) {
+            this.wrapper.scrollTop = maxScroll
             this.pause()
             this._showEndOverlay()
             return
         }
 
-        this.wrapper.scrollTop += this.speed
+        this.wrapper.scrollTop = nextScroll
         this._trackSegment()
         this.raf = requestAnimationFrame(() => this._tick())
+    }
+
+    toggleReverse() {
+        this.reversed = !this.reversed
+        const btn = document.getElementById('tp-reverse-btn')
+        btn.classList.toggle('active', this.reversed)
+        btn.title = this.reversed ? 'Reverse: ON — click to cancel (X)' : 'Reverse Scroll (X)'
     }
 
     /* ── Segment Tracking ─────────────────────────────────────────────── */
@@ -189,21 +207,25 @@ class Teleprompter {
 
     /* ── Controls Visibility ──────────────────────────────────────────── */
     _showControls() {
-        this.controls.classList.remove('hidden')
+        this.controls.classList.remove('hidden', 'done')
         document.body.classList.add('controls-visible')
         clearTimeout(this.hideTimer)
         this.hideTimer = setTimeout(() => this._hideControls(), 3500)
     }
 
     _hideControls() {
-        this.controls.classList.add('hidden')
+        const c = this.controls
+        c.classList.add('hidden')
         document.body.classList.remove('controls-visible')
+        // Block pointer-events only after the slide-out transition finishes
+        c.addEventListener('transitionend', () => c.classList.add('done'), { once: true })
     }
 
     /* ── Event Binding ────────────────────────────────────────────────── */
     _bindControls() {
         document.getElementById('tp-play-btn').addEventListener('click',    () => this.togglePlay())
         document.getElementById('tp-restart-btn').addEventListener('click', () => this.restart())
+
         document.getElementById('tp-exit-btn').addEventListener('click', () => {
             this.pause()
             window.close()
@@ -261,6 +283,9 @@ class Teleprompter {
                 case 'Escape':
                     this.pause()
                     window.close()
+                    break
+                case 'x':
+                    this.toggleReverse()
                     break
                 case 'f':
                     toggleFullscreen()
