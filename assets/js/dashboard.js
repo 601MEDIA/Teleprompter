@@ -67,6 +67,7 @@ function renderSegments() {
 
     if (!state.activeProjectId) {
         el('add-segment-btn').style.display = 'none'
+        el('launch-all-btn').style.display  = 'none'
         container.innerHTML = `
             <div class="empty-state">
                 <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -85,6 +86,7 @@ function renderSegments() {
     el('main-title').textContent    = project?.name ?? 'Project'
     el('main-subtitle').textContent = `${state.segments.length} segment${state.segments.length !== 1 ? 's' : ''}`
     el('add-segment-btn').style.display = 'inline-flex'
+    el('launch-all-btn').style.display  = state.segments.length > 1 ? 'inline-flex' : 'none'
 
     if (state.segments.length === 0) {
         container.innerHTML = `
@@ -102,13 +104,6 @@ function renderSegments() {
     }
 
     container.innerHTML = `
-        ${state.segments.length > 1 ? `
-        <div class="launch-all-bar">
-            <button class="btn btn-launch btn-launch-all"
-                    onclick="launchProject(${state.activeProjectId})">
-                ▶▶ Launch All ${state.segments.length} Segments
-            </button>
-        </div>` : ''}
         <div class="segment-grid" id="segment-grid">
             ${state.segments.map((s, i) => `
                 <div class="segment-card" data-id="${s.id}">
@@ -379,6 +374,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     el('main-title').textContent    = 'Dashboard'
     el('main-subtitle').textContent = 'Select a project to get started'
     el('add-segment-btn').style.display = 'none'
+    el('launch-all-btn').style.display  = 'none'
 
     el('project-name-input').addEventListener('keydown', e => {
         if (e.key === 'Enter') saveProject()
