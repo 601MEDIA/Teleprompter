@@ -14,11 +14,15 @@ A browser-based teleprompter for organizing production scripts into projects and
 - Read against a center guide with controls that hide automatically
 - Store projects and scripts in a local SQLite database
 
+<br>
 
 ![601MEDIA Telepromptor](https://601mediasolutions.com/cdn_601/teleprompter-promo.png)
 
+<br>
+
 ![Watch in action](https://601mediasolutions.com/cdn_601/teleprompter-promo.gif)
 
+<br>
 
 ## Requirements
 
