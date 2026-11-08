@@ -37,10 +37,16 @@
                     <div class="main-title" id="main-title">Dashboard</div>
                     <div class="main-subtitle" id="main-subtitle">Select a project to get started</div>
                 </div>
-                <button class="btn btn-accent" id="add-segment-btn"
-                        onclick="openCreateSegment()" style="display:none">
-                    + Add Segment
-                </button>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button class="btn btn-launch" id="launch-all-btn"
+                            onclick="launchProject(state.activeProjectId)" style="display:none">
+                        ▶▶ Launch All
+                    </button>
+                    <button class="btn btn-accent" id="add-segment-btn"
+                            onclick="openCreateSegment()" style="display:none">
+                        + Add Segment
+                    </button>
+                </div>
             </div>
             <div id="segments-area" style="display:flex;flex:1;overflow:hidden;">
                 <div class="empty-state">
