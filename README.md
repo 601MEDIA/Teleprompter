@@ -14,6 +14,9 @@ A browser-based teleprompter for organizing production scripts into projects and
 - Read against a center guide with controls that hide automatically
 - Store projects and scripts in a local SQLite database
 
+![Watch](https://601mediasolutions.com/cdn_601/teleprompter-promo.gif)
+
+
 ## Requirements
 
 - PHP with syntax support for PHP 7.4 or newer
